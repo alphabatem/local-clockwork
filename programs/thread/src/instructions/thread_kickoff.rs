@@ -3,14 +3,15 @@ use std::{
     hash::{Hash, Hasher},
     str::FromStr,
 };
-
+use solana_program;
+// use solana_program::account_info::AccountInfo;
 use anchor_lang::prelude::*;
 use chrono::{DateTime, NaiveDateTime, Utc};
 use clockwork_cron::Schedule;
 use clockwork_network_program::state::{Worker, WorkerAccount};
 use clockwork_utils::thread::Trigger;
 use pyth_sdk_solana::load_price_feed_from_account_info;
-
+use pyth_sdk_solana::state::SolanaPriceAccount;
 use crate::{errors::*, state::*};
 
 use super::TRANSACTION_BASE_FEE_REIMBURSEMENT;
@@ -209,7 +210,15 @@ pub fn handler(ctx: Context<ThreadKickoff>) -> Result<()> {
                         ClockworkError::TriggerConditionFailed
                     );
                     const STALENESS_THRESHOLD: u64 = 60; // staleness threshold in seconds
-                    let price_feed = load_price_feed_from_account_info(account_info).unwrap();
+                    // let solana_account_info: solana_program::account_info::AccountInfo = account_info.into();
+
+                    let solana_account_info: &solana_program::account_info::AccountInfo = account_info.as_ref();
+
+                    // let wsol_ata = solana_program::account_info::AccountInfo::t(&mut &account_info.try_borrow_data()?[..]).unwrap();
+                    // let ab = solana_account_info;
+                    // let abc = account_info;
+                    let price_feed = SolanaPriceAccount::account_info_to_feed(solana_account_info).unwrap();
+                    // let price_feed = load_price_feed_from_account_info(account_info).unwrap();
                     let current_timestamp = Clock::get()?.unix_timestamp;
                     let current_price = price_feed
                         .get_price_no_older_than(current_timestamp, STALENESS_THRESHOLD)

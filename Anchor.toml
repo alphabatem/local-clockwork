@@ -1,6 +1,6 @@
 [provider]
-cluster = "mainnet"
-wallet = "~/.config/solana/id.json"
+cluster = "devnet"
+wallet = "~/.config/solana/deploy_keypair.json"
 
 [programs.localnet]
 clockwork_network_program = "F8dKseqmBoAkHx3c58Lmb9TgJv5qeTf3BbtZZSEzYvUa"
@@ -17,6 +17,11 @@ clockwork_network_program = "F8dKseqmBoAkHx3c58Lmb9TgJv5qeTf3BbtZZSEzYvUa"
 clockwork_thread_program = "CLoCKyJ6DXBJqqu2VWx9RLbgnwwR6BMHHuyasVmfMzBh"
 clockwork_webhook_program = "E7p5KFo8kKCDm6BUnWtnVFkQSYh6ZA6xaGAuvpv8NXTa"
 
+[programs.devnet]
+clockwork_network_program = "AkMKG5BEpMfYqoEAhrcEG77q8ajAgRzw6mojhnPY3Ava"
+clockwork_thread_program = "zHku7EZB2gY5zNvDmdK1sPUA2TwRzd2peoHexse3RKj"
+clockwork_webhook_program = "UYxo4oWbV7PSW9WSD7it2xdVCtdjatd9W94L6s5wLJD"
+
 [features]
 resolution = false
 seeds = false
@@ -24,3 +29,6 @@ skip-lint = false
 
 [registry]
 url = "https://anchor.projectserum.com"
+
+[toolchain]
+anchor_version = "0.30.0"
