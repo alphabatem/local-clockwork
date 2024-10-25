@@ -15,7 +15,7 @@ use instructions::*;
 use jobs::*;
 use state::*;
 
-declare_id!("AkMKG5BEpMfYqoEAhrcEG77q8ajAgRzw6mojhnPY3Ava");
+declare_id!("BqZbdEZRfadcD4vFmq6N1eSnxYQkDuuFkG3QkJ2c6Bmm");
 
 #[program]
 pub mod network_program {

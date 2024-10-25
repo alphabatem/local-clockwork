@@ -18,9 +18,14 @@ clockwork_thread_program = "CLoCKyJ6DXBJqqu2VWx9RLbgnwwR6BMHHuyasVmfMzBh"
 clockwork_webhook_program = "E7p5KFo8kKCDm6BUnWtnVFkQSYh6ZA6xaGAuvpv8NXTa"
 
 [programs.devnet]
-clockwork_network_program = "AkMKG5BEpMfYqoEAhrcEG77q8ajAgRzw6mojhnPY3Ava"
-clockwork_thread_program = "zHku7EZB2gY5zNvDmdK1sPUA2TwRzd2peoHexse3RKj"
-clockwork_webhook_program = "UYxo4oWbV7PSW9WSD7it2xdVCtdjatd9W94L6s5wLJD"
+clockwork_network_program = "BqZbdEZRfadcD4vFmq6N1eSnxYQkDuuFkG3QkJ2c6Bmm"
+clockwork_thread_program = "8npQifLwM8EW8T5b8jqGhMBCjn1U3rSjwkt5wmVSbppW"
+clockwork_webhook_program = "9oZYsvtqURK1ZJb9PD8GTLKuMHfaq4wvwD9R7p7KhdRb"
+
+["https://testnet.atlas.xyz?apikey=a60f3e0b285c14806f77ba6213e3a298287f"]
+clockwork_network_program = "BqZbdEZRfadcD4vFmq6N1eSnxYQkDuuFkG3QkJ2c6Bmm"
+clockwork_thread_program = "8npQifLwM8EW8T5b8jqGhMBCjn1U3rSjwkt5wmVSbppW"
+clockwork_webhook_program = "9oZYsvtqURK1ZJb9PD8GTLKuMHfaq4wvwD9R7p7KhdRb"
 
 [features]
 resolution = false
@@ -31,4 +36,3 @@ skip-lint = false
 url = "https://anchor.projectserum.com"
 
 [toolchain]
-anchor_version = "0.30.0"

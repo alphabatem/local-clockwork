@@ -23,7 +23,11 @@ pub struct PoolUpdate<'info> {
     #[account(mut)]
     pub payer: Signer<'info>,
 
-    #[account(mut, address = pool.pubkey())]
+    #[account(
+        mut, 
+        // address = pool.pubkey(),
+        constraint = pool.key() == Pool::pubkey(pool.id)
+    )]
     pub pool: Account<'info, Pool>,
 
     #[account(address = system_program::ID)]

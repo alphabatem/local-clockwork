@@ -57,7 +57,10 @@ pub struct UnstakeProcess<'info> {
     )]
     pub unstake: Box<Account<'info, Unstake>>,
 
-    #[account(address = worker.pubkey())]
+    #[account(
+        // address = worker.pubkey()
+        constraint = worker.key() == Worker::pubkey(worker.id)
+    )]
     pub worker: Account<'info, Worker>,
 
     #[account(

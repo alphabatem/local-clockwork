@@ -36,19 +36,22 @@ pub struct DistributeFeesProcessEntry<'info> {
     pub registry: Account<'info, Registry>,
 
     #[account(
-        address = snapshot.pubkey(),
+        // address = snapshot.pubkey(),
+        constraint = snapshot.key() == Snapshot::pubkey(snapshot.id),
         constraint = registry.current_epoch.eq(&registry.current_epoch)
     )]
     pub snapshot: Account<'info, Snapshot>,
 
     #[account(
-        address = snapshot_entry.pubkey(),
+        // address = snapshot_entry.pubkey(),
+        constraint = snapshot_entry.key() == SnapshotEntry::pubkey(snapshot_frame.key(), snapshot_entry.id),
         has_one = snapshot_frame,
     )]
     pub snapshot_entry: Account<'info, SnapshotEntry>,
 
     #[account(
-        address = snapshot_frame.pubkey(),
+        // address = snapshot_frame.pubkey(),
+        constraint = snapshot_frame.key() == SnapshotFrame::pubkey(snapshot.key(), snapshot_frame.id),
         has_one = snapshot,
         has_one = worker,
     )]
@@ -57,7 +60,10 @@ pub struct DistributeFeesProcessEntry<'info> {
     #[account(address = config.epoch_thread)]
     pub thread: Signer<'info>,
 
-    #[account(address = worker.pubkey())]
+    #[account(
+        // address = worker.pubkey()
+        constraint = worker.key() == Worker::pubkey(worker.id)
+    )]
     pub worker: Account<'info, Worker>,
 }
 

@@ -43,7 +43,10 @@ pub struct StakeDelegationsProcessDelegation<'info> {
     #[account(address = anchor_spl::token::ID)]
     pub token_program: Program<'info, Token>,
 
-    #[account(address = worker.pubkey())]
+    #[account(
+        // address = worker.pubkey()
+        constraint = worker.key() == Worker::pubkey(worker.id)
+    )]
     pub worker: Account<'info, Worker>,
 
     #[account(

@@ -16,7 +16,8 @@ pub struct TakeSnapshotCreateEntry<'info> {
     pub config: Account<'info, Config>,
 
     #[account(
-        address = delegation.pubkey(),
+        // address = delegation.pubkey(),
+        constraint = delegation.key() == Delegation::pubkey(worker.key(), delegation.id),
         constraint = delegation.id.eq(&snapshot_frame.total_entries),
         has_one = worker,
     )]
@@ -32,7 +33,8 @@ pub struct TakeSnapshotCreateEntry<'info> {
     pub registry: Box<Account<'info, Registry>>,
 
     #[account(
-        address = snapshot.pubkey(),
+        // address = snapshot.pubkey(),
+        constraint = snapshot.key() == Snapshot::pubkey(snapshot.id),
         constraint = registry.current_epoch.checked_add(1).unwrap().eq(&snapshot.id)
     )]
     pub snapshot: Box<Account<'info, Snapshot>>,
@@ -70,7 +72,8 @@ pub struct TakeSnapshotCreateEntry<'info> {
     pub thread: Signer<'info>,
 
     #[account(
-        address = worker.pubkey(),
+        // address = worker.pubkey(),
+        constraint = worker.key() == Worker::pubkey(worker.id),
         constraint = worker.id.eq(&snapshot_frame.id),
     )]
     pub worker: Box<Account<'info, Worker>>,

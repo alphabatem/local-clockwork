@@ -30,7 +30,8 @@ pub struct DistributeFeesProcessSnapshot<'info> {
     pub registry: Account<'info, Registry>,
 
     #[account(
-        address = snapshot.pubkey(),
+        // address = snapshot.pubkey(),
+        constraint = snapshot.key() == Snapshot::pubkey(snapshot.id),
         constraint = snapshot.id.eq(&registry.current_epoch)
     )]
     pub snapshot: Account<'info, Snapshot>,

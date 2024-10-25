@@ -18,7 +18,10 @@ pub struct StakeDelegationsProcessWorker<'info> {
     #[account(address = config.epoch_thread)]
     pub thread: Signer<'info>,
 
-    #[account(address = worker.pubkey())]
+    #[account(
+        // address = worker.pubkey()
+        constraint = worker.key() == Worker::pubkey(worker.id)
+    )]
     pub worker: Account<'info, Worker>,
 }
 

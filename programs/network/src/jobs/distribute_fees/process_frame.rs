@@ -23,13 +23,15 @@ pub struct DistributeFeesProcessFrame<'info> {
     pub registry: Account<'info, Registry>,
 
     #[account(
-        address = snapshot.pubkey(),
+        // address = snapshot.pubkey(),
+        constraint = snapshot.key() == Snapshot::pubkey(snapshot.id),
         constraint = snapshot.id.eq(&registry.current_epoch)
     )]
     pub snapshot: Account<'info, Snapshot>,
 
     #[account(
-        address = snapshot_frame.pubkey(),
+        // address = snapshot_frame.pubkey(),
+        constraint = snapshot_frame.key() == SnapshotFrame::pubkey(snapshot.key(), snapshot_frame.id),
         has_one = snapshot,
         has_one = worker,
     )]

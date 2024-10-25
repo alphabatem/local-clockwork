@@ -38,7 +38,10 @@ pub struct ThreadKickoff<'info> {
     pub thread: Box<Account<'info, Thread>>,
 
     /// The worker.
-    #[account(address = worker.pubkey())]
+    #[account(
+        // address = worker.pubkey()
+        constraint = worker.key() == Worker::pubkey(worker.id)
+    )]
     pub worker: Account<'info, Worker>,
 }
 

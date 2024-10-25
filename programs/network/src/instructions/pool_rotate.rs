@@ -30,20 +30,23 @@ pub struct PoolRotate<'info> {
     pub signatory: Signer<'info>,
 
     #[account(
-        address = snapshot.pubkey(),
+        // address = snapshot.pubkey(),
+        constraint = snapshot.key() == Snapshot::pubkey(snapshot.id),
         constraint = snapshot.id.eq(&registry.current_epoch)
     )]
     pub snapshot: Account<'info, Snapshot>,
 
     #[account(
-        address = snapshot_frame.pubkey(),
+        // address = snapshot_frame.pubkey(),
+        constraint = snapshot_frame.key() == SnapshotFrame::pubkey(snapshot.key(), snapshot_frame.id),
         has_one = snapshot,
         has_one = worker
     )]
     pub snapshot_frame: Account<'info, SnapshotFrame>,
 
     #[account(
-        address = worker.pubkey(),
+        // address = worker.pubkey(),
+        constraint = worker.key() == Worker::pubkey(worker.id),
         has_one = signatory
     )]
     pub worker: Account<'info, Worker>,

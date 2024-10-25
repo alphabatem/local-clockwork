@@ -18,7 +18,10 @@ pub struct UnstakePreprocess<'info> {
     #[account(address = config.epoch_thread)]
     pub thread: Signer<'info>,
 
-    #[account(address = unstake.pubkey())]
+    #[account(
+        // address = unstake.pubkey()
+        constraint = unstake.key() == Unstake::pubkey(unstake.id)
+    )]
     pub unstake: Account<'info, Unstake>,
 }
 

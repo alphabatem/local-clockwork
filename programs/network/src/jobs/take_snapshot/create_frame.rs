@@ -55,7 +55,8 @@ pub struct TakeSnapshotCreateFrame<'info> {
     pub thread: Signer<'info>,
 
     #[account(
-        address = worker.pubkey(),
+        // address = worker.pubkey(),
+        constraint = worker.key() == Worker::pubkey(worker.id),
         constraint = worker.id.eq(&snapshot.total_frames),
     )]
     pub worker: Account<'info, Worker>,
